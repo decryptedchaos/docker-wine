@@ -15,6 +15,7 @@ ENV PATH=$PATH:/opt/wine-stable/bin
 
 ENV         DEBIAN_FRONTEND noninteractive
 ENV         USER_NAME container
+ENV         WINEDEBUG=-all
 
 USER        container
 ENV         HOME /home/container
