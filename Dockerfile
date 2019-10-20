@@ -8,5 +8,20 @@ RUN apt-add-repository https://dl.winehq.org/wine-builds/debian/
 RUN dpkg --add-architecture i386
 RUN apt-get update
 RUN apt-get install --assume-yes winehq-stable lib32gcc1 curl xvfb
+
+
 ENV DISPLAY :0
 ENV PATH=$PATH:/opt/wine-stable/bin
+
+ENV         DEBIAN_FRONTEND noninteractive
+ENV         USER_NAME container
+
+USER        container
+ENV         HOME /home/container
+WORKDIR     /home/container
+
+COPY        ./libnss_wrapper.so /libnss_wrapper.so
+COPY        ./entrypoint.sh /entrypoint.sh
+CMD         ["/bin/bash", "/entrypoint.sh"]
+
+
